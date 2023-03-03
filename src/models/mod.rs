@@ -194,18 +194,21 @@ pub struct PageCreateRequest {
 pub struct Page {
     pub id: PageId,
     /// Date and time when this page was created.
-    pub created_time: DateTime<Utc>,
+    pub created_time: Option<DateTime<Utc>>,
     /// Date and time when this page was updated.
-    pub last_edited_time: DateTime<Utc>,
+    pub last_edited_time: Option<DateTime<Utc>>,
     /// The archived status of the page.
-    pub archived: bool,
-    pub properties: Properties,
-    pub parent: Parent,
+    pub archived: Option<bool>,
+    pub properties: Option<Properties>,
+    pub parent: Option<Parent>,
 }
 
 impl Page {
     pub fn title(&self) -> Option<String> {
-        self.properties.title()
+        match &self.properties {
+          Some(props) => props.title(),
+          None => None,
+        }
     }
 }
 
