@@ -74,7 +74,7 @@ fn rich_text_mention_user_person() {
         }),
       },
       mention: MentionObject::User {
-        user: User::Person {
+        user: User::Person(super::users::PersonUser {
           common: UserCommon {
             id: UserId::from_str("1118608e-35e8-4fa3-aef7-a4ced85ce8e0").unwrap(),
             name: Some("John Doe".to_string()),
@@ -85,8 +85,8 @@ fn rich_text_mention_user_person() {
           },
           person: Person {
             email: "john.doe@gmail.com".to_string()
-          },
-        }
+          }
+        })
       },
     }
   )

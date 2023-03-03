@@ -1,14 +1,15 @@
 use crate::TodoConfig;
 use anyhow::Result;
-use notion::ids::{AsIdentifier, DatabaseId};
+use notion::ids::{AsIdentifier};//, DatabaseId};
 use notion::models::search::NotionSearch;
 use notion::models::Database;
 use notion::NotionApi;
+/*
 use skim::{Skim, SkimItem, SkimItemReceiver, SkimItemSender, SkimOptions};
 use std::borrow::Cow;
 use std::ops::Deref;
 use std::sync::Arc;
-
+ 
 fn skim_select_database(databases: Vec<Database>) -> Result<DatabaseId> {
     let options = SkimOptions::default();
 
@@ -48,7 +49,8 @@ fn skim_select_database(databases: Vec<Database>) -> Result<DatabaseId> {
 
     Ok(database_id.clone())
 }
-
+}
+*/
 pub async fn configure(notion_api: NotionApi) -> Result<()> {
     let databases: Vec<Database> = notion_api
         .search(NotionSearch::filter_by_databases())
@@ -56,7 +58,8 @@ pub async fn configure(notion_api: NotionApi) -> Result<()> {
         .only_databases()
         .results;
 
-    let database_id = skim_select_database(databases)?;
+    //let database_id = skim_select_database(databases)?;
+    let database_id = databases.first().unwrap().as_id().clone();
 
     println!("Selected database's id: {}", database_id);
 
@@ -68,4 +71,4 @@ pub async fn configure(notion_api: NotionApi) -> Result<()> {
     std::fs::write("../todo_config.toml", bytes)?;
 
     Ok(())
-}
+  }

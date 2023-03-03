@@ -36,7 +36,7 @@ cargo-husky = "1"
 wiremock = "0.5.2"
 anyhow = "1.0.40"
 clap = { version = "4.0", features = ["derive"] }
-skim = "0.10.2"
+# skim = "0.10.2"
 crossbeam-channel = "0.5"
 toml = "0.5.8"
 
